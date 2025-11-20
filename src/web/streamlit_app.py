@@ -3,9 +3,20 @@ Streamlit Web Interface - Modern chat UI for AI assistant
 """
 import streamlit as st
 import os
-from datetime import datetime
-from src.core.chat_engine import AIChatEngine
-from src.utils.config_loader import load_config
+import sys
+
+# ABSOLUTE PATH SOLUTION
+PROJECT_ROOT = r"C:\Users\mitch\OneDrive\Documents\GitHub\ai-chat-bot"
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+# Import modules
+try:
+    from src.core.chat_engine import AIChatEngine
+    from src.utils.config_loader import load_config
+except ImportError as e:
+    st.error(f"❌ Import error: {e}")
+    st.stop()
 
 # Page configuration
 st.set_page_config(
@@ -15,16 +26,66 @@ st.set_page_config(
 )
 
 # Initialize session state
-if 'chat_engine' not in st.session_state:
-    config = load_config()
-    st.session_state.chat_engine = AIChatEngine(
-        api_key=config['openai_api_key'],
-        model=config.get('model', 'gpt-3.5-turbo')
-    )
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 
-# Custom CSS for better styling
+if 'chat_engine' not in st.session_state:
+    try:
+        config = load_config()
+        st.session_state.chat_engine = AIChatEngine(
+            api_key=config['openai_api_key'],
+            model=config.get('model', 'gpt-3.5-turbo')
+        )
+        st.success("✅ AI Chat Bot initialized successfully!")
+    except Exception as e:
+        st.error(f"❌ Failed to initialize chat engine: {e}")
+        
+        # Show helpful instructions
+        st.markdown("""
+        ### 🔧 Setup Instructions:
+        
+        1. **Get an OpenAI API Key:**
+           - Visit https://platform.openai.com/api-keys
+           - Create an account if needed
+           - Click "Create new secret key"
+           - Copy the key (starts with `sk-`)
+        
+        2. **Create a `.env` file in your project root:**
+        ```env
+        OPENAI_API_KEY=sk-your-actual-key-here
+        MODEL=gpt-3.5-turbo
+        MAX_HISTORY=20
+        TEMPERATURE=0.7
+        MAX_TOKENS=500
+        ```
+        
+        3. **Restart the application**
+        """)
+        
+        # Debug information
+        with st.expander("🔧 Debug Information"):
+            st.write(f"**Project Root:** {PROJECT_ROOT}")
+            st.write(f"**Current Directory:** {os.getcwd()}")
+            
+            # Check if .env file exists
+            env_path = os.path.join(PROJECT_ROOT, ".env")
+            st.write(f"**.env File Exists:** {os.path.exists(env_path)}")
+            
+            if os.path.exists(env_path):
+                st.write("**.env Content:**")
+                try:
+                    with open(env_path, 'r') as f:
+                        st.code(f.read())
+                except Exception as read_error:
+                    st.write(f"Could not read .env: {read_error}")
+            
+            # Check environment variables
+            st.write("**Environment Variables:**")
+            st.write(f"OPENAI_API_KEY: {'***' + os.getenv('OPENAI_API_KEY', 'NOT SET')[-4:] if os.getenv('OPENAI_API_KEY') else 'NOT SET'}")
+        
+        st.stop()
+
+# Custom CSS
 st.markdown("""
 <style>
     .chat-message {
@@ -63,16 +124,18 @@ with st.sidebar:
     )
     
     # Conversation controls
-    if st.button("🔄 New Conversation"):
-        st.session_state.messages = []
-        st.session_state.chat_engine.memory.clear_conversation("user")
-        st.rerun()
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("🔄 New Chat"):
+            st.session_state.messages = []
+            st.session_state.chat_engine.memory.clear_conversation("user")
+            st.rerun()
     
-    if st.button("💾 Save Conversation"):
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"data/conversations/chat_{timestamp}.json"
-        st.session_state.chat_engine.memory.save_conversation("user", filename)
-        st.success(f"Conversation saved to {filename}")
+    with col2:
+        if st.button("📊 Stats"):
+            stats = st.session_state.chat_engine.get_conversation_stats("user")
+            st.write(f"Messages: {stats['total_messages']}")
+            st.write(f"API Requests: {stats['api_usage']['total_requests']}")
     
     st.markdown("---")
     st.markdown("### Conversation Info")
