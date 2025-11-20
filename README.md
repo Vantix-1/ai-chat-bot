@@ -4,8 +4,6 @@
 ---
 
 # 🚀 Overview
-
----
 A modern, production-ready AI chat application built with Streamlit and FastAPI that provides intelligent conversations without requiring any external API keys or paid services. Perfect for developers learning AI integration, portfolio projects, or anyone wanting a private, self-contained chat assistant.
 
 https://via.placeholder.com/AI+Chat+Bot+Interface
@@ -13,8 +11,6 @@ https://via.placeholder.com/AI+Chat+Bot+Interface
 ---
 
 # ✨ Features
-
----
 
 🎯 No API Keys Required - Intelligent local responses with context awareness
 
@@ -57,16 +53,16 @@ ai-chat-bot/
 ```
 ---
 # 🛠️ Quick Start
----
+```
 Prerequisites:
 -Python 3.11 or higher
 -Git
----
+```
+
 
 # Installation & Setup
-# Method 1: Standard Installation (Recommended)
-
 ---
+# Method 1: Standard Installation (Recommended)
 
 bash
 
@@ -99,10 +95,9 @@ pip install -r requirements.txt
 streamlit run src/web/streamlit_app.py
 ```
 
----
+
 
 # Method 2: Docker Installation
-
 ----
 
 bash
@@ -119,14 +114,11 @@ docker-compose up -d
 
 # 3. Access the application at http://localhost:8501
 
----
+
 
 # Method 3: Developer Installation
-
 ---
-
 bash
-
 
 # Clone and setup for development
 ```
@@ -150,7 +142,7 @@ pip install -e .
 ```
 streamlit run src/web/streamlit_app.py
 ```
----
+
 
 # 🎯 Usage
 ---
@@ -168,7 +160,7 @@ Open your browser to http://localhost:8501
 
 # Start chatting! The AI will respond intelligently to your messages
 
----
+
 
 # API Usage
 ---
@@ -201,7 +193,6 @@ curl "http://localhost:8000/conversation/test_user/stats"
 curl -X DELETE "http://localhost:8000/conversation/test_user"
 ```
 
----
 # API documentation available at:
 ---
 ```
@@ -209,9 +200,10 @@ Swagger UI: http://localhost:8000/docs
 
 ReDoc: http://localhost:8000/redoc
 ```
----
+
 # 🔧 Configuration
-Environment Variables
+---
+Environment Variables:
 ```
 Create a .env file in the project root (optional - works without it):
 
@@ -239,7 +231,7 @@ self.responses["your_topic"] = [
 ]
 
 ```
----
+
 
 # 🚀 Deployment
 ---
@@ -282,7 +274,7 @@ npm install -g @railway/cli
 ```
 railway up
 ```
----
+
 
 # 🧪 Testing
 ---
@@ -299,40 +291,41 @@ pytest --cov=src
 # Run specific test file
 pytest tests/test_chat_engine.py
 ```
----
+
 
 # 📊 Features in Detail
 ---
-```
-Intelligent Local Responses
 
-Context-aware conversations
+-Intelligent Local Responses
 
-Multiple response categories
+-Context-aware conversations
 
-Smart topic detection
+-Multiple response categories
 
-Natural conversation flow
+-Smart topic detection
 
-Conversation Management
-Persistent chat history
+-Natural conversation flow
 
-Multi-user support
+-Conversation Management
 
-Export capabilities (JSON/Text)
+-Persistent chat history
 
-Conversation statistics
+-Multi-user support
 
-Modern Web Interface
-Responsive design
+-Export capabilities (JSON/Text)
 
-Real-time updates
+-Conversation statistics
 
-Dark theme
+-Modern Web Interface
 
-Mobile-friendly
-```
----
+-Responsive design
+
+-Real-time updates
+
+-Dark theme
+
+-Mobile-friendly
+
 
 
 
@@ -358,12 +351,11 @@ json
   "conversation_length": 5
 }
 ```
----
 
 
 # 🛠️ Development
 ---
-Project Structure
+Project Structure:
 ```text
 src/
 ├── core/           # Business logic
@@ -400,7 +392,7 @@ Define Pydantic models
 
 Implement endpoint logic
 ```
----
+
 
 
 # 🤝 Contributing
@@ -418,7 +410,7 @@ Push to the branch (git push origin feature/amazing-feature)
 
 Open a Pull Request
 ```
----
+
 
 
 # 📝 License
@@ -426,7 +418,7 @@ Open a Pull Request
 ```
 This project is licensed under the MIT License - see the LICENSE file for details.
 ```
----
+
 
 # 🙏 Acknowledgments
 ---
@@ -455,17 +447,18 @@ Discussions: GitHub Discussions
 ```
 Ready to enhance your AI Chat Bot? Check out these advanced features:
 
-Add voice interface (speech-to-text)
+-Add voice interface (speech-to-text)
 
-Implement file upload and analysis
+-Implement file upload and analysis
 
-Add user authentication
+-Add user authentication
 
-Integrate with external AI APIs
+-Integrate with external AI APIs
 
-Deploy to cloud platform
+-Deploy to cloud platform
 
-Add analytics dashboard
+-Add analytics dashboard
+
 ```
 ---
 
