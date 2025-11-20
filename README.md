@@ -1,8 +1,10 @@
 # 🤖 AI Chat Bot - Intelligent Local Assistant
 <p align="center"> <img src="https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white&style=for-the-badge" /> <img src="https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white&style=for-the-badge" /> <img src="https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white&style=for-the-badge" /> <img src="https://img.shields.io/badge/No_API_Keys_Required-00ff99?style=for-the-badge" /> <img src="https://img.shields.io/badge/Production_Ready-blueviolet?style=for-the-badge" /> </p>
+
 ---
 
 # 🚀 Overview
+
 ---
 A modern, production-ready AI chat application built with Streamlit and FastAPI that provides intelligent conversations without requiring any external API keys or paid services. Perfect for developers learning AI integration, portfolio projects, or anyone wanting a private, self-contained chat assistant.
 
